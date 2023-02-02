@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final GlobalKey<ScaffoldState> _drawerKey =
+      GlobalKey(); // Created a key for drawer
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+          key: _drawerKey,
+          child: Column(
+            children: [
+              Text("1"),
+              Text("2"),
+              Text("3"),
+              Text("4"),
+            ],
+          ),
+        ),
+        drawerEnableOpenDragGesture: false,
+        floatingActionButton: Builder(builder: (context) {
+          return FloatingActionButton(
+            onPressed: () =>
+                Scaffold.of(context).openDrawer(), // <-- Opens drawer.
+          );
+        }),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         body: Stack(children: [
           Column(
             children: [
@@ -39,7 +59,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       color: Colors.amber,
                       height: 250,
-                      width: 180,
+                      width: MediaQuery.of(context).size.width / 2.5,
                     ),
                     SizedBox(
                       width: 10,
@@ -47,7 +67,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       color: Colors.amber,
                       height: 250,
-                      width: 180,
+                      width: MediaQuery.of(context).size.width / 2.5,
                     ),
                   ],
                 ),
